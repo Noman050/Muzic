@@ -39,7 +39,7 @@ class OptionScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
                     minimumSize: const Size(250, 120),
-                    backgroundColor: const Color.fromRGBO(225, 100, 143, 1.0)),
+                    backgroundColor: buttonColor),
                 icon: const Icon(Icons.add_circle_outlined),
                 onPressed: () {
                   Navigator.of(context).pushNamed(MyRoute.addSongScreen);
@@ -62,7 +62,7 @@ class OptionScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0)),
                   minimumSize: const Size(250, 120),
-                  backgroundColor: const Color.fromRGBO(225, 100, 143, 1.0),
+                  backgroundColor: buttonColor,
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed(MyRoute.homeScreen);
@@ -81,11 +81,11 @@ class OptionScreen extends StatelessWidget {
                   onPressed: () {
                     SystemNavigator.pop();
                   },
-                  icon: const Icon(Icons.exit_to_app, color: Colors.white),
+                  icon: const Icon(Icons.exit_to_app, color: whiteColor),
                   label: const Text("Exit",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white,
+                          color: whiteColor,
                           fontWeight: FontWeight.bold),),),
             ),
             ElevatedButton(onPressed: (){

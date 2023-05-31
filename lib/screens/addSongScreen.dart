@@ -131,7 +131,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
           child: ListView(children: <Widget>[
             Text(
               'Select Artists',
-              style: myTextStyle(Colors.white),
+              style: myTextStyle(whiteColor),
             ),
             const SizedBox(height: 10.0),
             Padding(
@@ -140,6 +140,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                 hint: const Text("Select Artist"),
                 items: _artists.map((String value) {
                   return DropdownMenuItem<String>(
+                  
                     value: value,
                     child: Text(value),
                   );
@@ -197,7 +198,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             const SizedBox(height: 10.0),
-            Text('Select Year of Release', style: myTextStyle(Colors.white)),
+            Text('Select Year of Release', style: myTextStyle(whiteColor)),
             const SizedBox(height: 10.0),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
@@ -226,7 +227,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
-                    backgroundColor: const Color.fromRGBO(225, 100, 143, 1.0)),
+                    backgroundColor: buttonColor),
                 onPressed: () {
                   String newtext = "";
                   showDialog(
@@ -260,7 +261,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             sizedBox10(),
-            Text('Select Album', style: myTextStyle(Colors.white)),
+            Text('Select Album', style: myTextStyle(whiteColor)),
             const SizedBox(height: 10.0),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
@@ -326,7 +327,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             sizedBox10(),
-            Text('Select Genre', style: myTextStyle(Colors.white)),
+            Text('Select Genre', style: myTextStyle(whiteColor)),
             sizedBox10(),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
@@ -347,7 +348,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             sizedBox10(),
-            Text('Select Tempo', style: myTextStyle(Colors.white)),
+            Text('Select Tempo', style: myTextStyle(whiteColor)),
             sizedBox10(),
             Padding(
               padding: const EdgeInsets.only(left: 100, right: 90),
@@ -383,7 +384,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               },
               child: Text(
                 "Back/Exit",
-                style: myTextStyle(Colors.white),
+                style: myTextStyle(whiteColor),
               ),
             )
           ]),

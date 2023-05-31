@@ -83,15 +83,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                 tileColor: bgColor,
                 title: Text(
                   song.displayNameWOExt,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: whiteColor),
                 ),
                 subtitle: Text(
                   song.artist.toString(),
-                  style: const TextStyle(color: Colors.white54),
+                  style: const TextStyle(color: white54Color),
                 ),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete),
-                  color: Colors.red,
+                  color: redColor,
                   onPressed: () {
                     removeFromPlaylist(song);
                   },
