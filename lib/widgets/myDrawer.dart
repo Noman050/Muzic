@@ -22,17 +22,17 @@ class MyDrawer extends StatelessWidget {
           child: Text(
             'Settings',
             style: TextStyle(
-              color: Colors.white,
+              color: whiteColor,
               fontSize: 22,
               letterSpacing: 2,
             ),
           ),
         ),
       ),
-      const Divider(color: Colors.white30),
+      const Divider(color: white30Color),
       ListTile(
-        leading: const Icon(Icons.audiotrack, color: Color.fromRGBO(225, 100, 143, 1.0),),
-        title: const Text('Audio', style: TextStyle(color: Colors.white),),
+        leading: const Icon(Icons.audiotrack, color: buttonColor,),
+        title: const Text('Audio', style: TextStyle(color: whiteColor),),
         onTap: () {
           // Update the state of the app
           // ...
@@ -40,10 +40,10 @@ class MyDrawer extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      const Divider(color: Colors.white30),
+      const Divider(color: white30Color),
       ListTile(
-        leading: const Icon(Icons.settings, color: Color.fromRGBO(225, 100, 143, 1.0),),
-        title: const Text('Advanced', style: TextStyle(color: Colors.white),),
+        leading: const Icon(Icons.settings, color: buttonColor,),
+        title: const Text('Download Songs', style: TextStyle(color: whiteColor),),
         onTap: () {
           // Update the state of the app
           // ...
@@ -51,10 +51,10 @@ class MyDrawer extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      const Divider(color: Colors.white30),
+      const Divider(color: white30Color),
       ListTile(
-        leading: const Icon(Icons.lock, color:  Color.fromRGBO(225, 100, 143, 1.0),),
-        title: const Text('Lockscreen', style: TextStyle(color: Colors.white),),
+        leading: const Icon(Icons.lock, color:  buttonColor,),
+        title: const Text('Lockscreen', style: TextStyle(color: whiteColor),),
         onTap: () {
           // Update the state of the app
           // ...
@@ -62,10 +62,10 @@ class MyDrawer extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      const Divider(color: Colors.white30),
+      const Divider(color: white30Color),
       ListTile(
-        leading: const Icon(Icons.more_horiz, color:  Color.fromRGBO(225, 100, 143, 1.0),),
-        title: const Text('Other', style: TextStyle(color: Colors.white),),
+        leading: const Icon(Icons.more_horiz, color:  buttonColor,),
+        title: const Text('Other', style: TextStyle(color: whiteColor),),
         onTap: () {
           // Update the state of the app
           // ...
@@ -73,10 +73,10 @@ class MyDrawer extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      const Divider(color: Colors.white30),
+      const Divider(color:white30Color),
       ListTile(
-        leading: const Icon(Icons.switch_camera, color:  Color.fromRGBO(225, 100, 143, 1.0),),
-        title: const Text('Switch Screen Mode', style: TextStyle(color: Colors.white),),
+        leading: const Icon(Icons.switch_camera, color:  buttonColor,),
+        title: const Text('Switch Screen Mode', style: TextStyle(color: whiteColor),),
         onTap: () {
           // Update the state of the app
           // ...
@@ -84,10 +84,10 @@ class MyDrawer extends StatelessWidget {
           Navigator.pop(context);
         },
       ),
-      const Divider(color: Colors.white60),
+      const Divider(color: white60Color),
       ListTile(
-        leading: const Icon(Icons.home_max_outlined, color:  Color.fromRGBO(225, 100, 143, 1.0),),
-        title: const Text('Home Screen', style: TextStyle(color: Colors.white),),
+        leading: const Icon(Icons.home_max_outlined, color:  buttonColor,),
+        title: const Text('Home Screen', style: TextStyle(color: whiteColor),),
         onTap: () {
           Navigator.of(context).pushNamed(MyRoute.optionScreen);
          
