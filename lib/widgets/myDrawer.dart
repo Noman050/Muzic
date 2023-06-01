@@ -45,10 +45,10 @@ class MyDrawer extends StatelessWidget {
         leading: const Icon(Icons.settings, color: buttonColor,),
         title: const Text('Download Songs', style: TextStyle(color: whiteColor),),
         onTap: () {
+          Navigator.of(context).pushNamed(MyRoute.meta);
           // Update the state of the app
           // ...
           // Then close the drawer
-          Navigator.pop(context);
         },
       ),
       const Divider(color: white30Color),
