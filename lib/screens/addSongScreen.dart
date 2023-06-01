@@ -112,8 +112,8 @@ class MetadataSelectionState extends State<AddSongScreen> {
     }
   }
 
-  TextStyle myTextStyle(Color color) {
-    return TextStyle(color: color);
+  TextStyle myTextStyle(Color color, FontWeight fw) {
+    return TextStyle(color: color, fontWeight: fw);
   }
 
   @override
@@ -131,7 +131,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
           child: ListView(children: <Widget>[
             Text(
               'Select Artists',
-              style: myTextStyle(whiteColor),
+              style: myTextStyle(whiteColor, FontWeight.bold),
             ),
             const SizedBox(height: 10.0),
             Padding(
@@ -160,8 +160,8 @@ class MetadataSelectionState extends State<AddSongScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
                     backgroundColor: buttonColor,),
-                icon: const Icon(Icons.group_add_outlined),
-                label: const Text('Add Artist'),
+                icon: const Icon(Icons.group_add_outlined, color: blackColor,),
+                label:  Text('Add Artist', style: myTextStyle(blackColor, FontWeight.bold),),
                 onPressed: () {
                   String newtext = "";
                   showDialog(
@@ -169,7 +169,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Add Artist'),
+                        title: const Text('Add Artist' ,),
                         content: TextField(
                           cursorColor: buttonColor,
                           autofocus: true,
@@ -182,7 +182,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                         actions: <Widget>[
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-                            child: const Text('Done'),
+                            child:  Text('Done', style: myTextStyle(blackColor, FontWeight.bold),),
                             onPressed: () {
                               Navigator.pop(context);
                               setState(() {
@@ -198,7 +198,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             const SizedBox(height: 10.0),
-            Text('Select Year of Release', style: myTextStyle(whiteColor)),
+            Text('Select Year of Release', style: myTextStyle(whiteColor, FontWeight.bold)),
             const SizedBox(height: 10.0),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
@@ -222,8 +222,8 @@ class MetadataSelectionState extends State<AddSongScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 100, right: 90),
               child: ElevatedButton.icon(
-                icon: const Icon(Icons.date_range_outlined),
-                label: const Text('Add Year'),
+                icon: const Icon(Icons.date_range_outlined, color: blackColor,),
+                label:  Text('Add Year', style: myTextStyle(blackColor, FontWeight.bold),),
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
@@ -234,7 +234,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text('Add Year'),
+                        title:  const Text('Add Year',),
                         content: TextField(
                           cursorColor: buttonColor,
                           autofocus: true,
@@ -245,7 +245,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                         actions: <Widget>[
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-                            child: const Text('Done'),
+                            child:  Text('Done' ,style: myTextStyle(blackColor, FontWeight.bold)),
                             onPressed: () {
                               Navigator.pop(context);
                               setState(() {
@@ -261,7 +261,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             sizedBox10(),
-            Text('Select Album', style: myTextStyle(whiteColor)),
+            Text('Select Album', style: myTextStyle(whiteColor, FontWeight.bold)),
             const SizedBox(height: 10.0),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
@@ -285,8 +285,8 @@ class MetadataSelectionState extends State<AddSongScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 100, right: 90),
               child: ElevatedButton.icon(
-                icon: const Icon(Icons.album_outlined),
-                label: const Text('Add Album'),
+                icon: const Icon(Icons.album_outlined, color: blackColor,),
+                label: Text('Add Album' ,style: myTextStyle(blackColor, FontWeight.bold)),
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
@@ -311,7 +311,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
                         actions: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-                            child: const Text('Done'),
+                            child: Text('Done' ,style: myTextStyle(blackColor, FontWeight.bold)),
                             onPressed: () {
                               Navigator.pop(context);
                               setState(() {
@@ -327,7 +327,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             sizedBox10(),
-            Text('Select Genre', style: myTextStyle(whiteColor)),
+            Text('Select Genre', style: myTextStyle(whiteColor, FontWeight.bold)),
             sizedBox10(),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50),
@@ -348,14 +348,14 @@ class MetadataSelectionState extends State<AddSongScreen> {
               ),
             ),
             sizedBox10(),
-            Text('Select Tempo', style: myTextStyle(whiteColor)),
+            Text('Select Tempo', style: myTextStyle(whiteColor , FontWeight.bold)),
             sizedBox10(),
             Padding(
               padding: const EdgeInsets.only(left: 100, right: 90),
               child: ElevatedButton.icon(
-                icon: const Icon(Icons.miscellaneous_services),
+                icon: const Icon(Icons.miscellaneous_services, color: blackColor,),
                 onPressed: _selectAudioFile,
-                label: const Text('Load Song'),
+                label: Text('Load Song', style: myTextStyle(blackColor, FontWeight.bold),),
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
@@ -366,9 +366,9 @@ class MetadataSelectionState extends State<AddSongScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 100, right: 90),
               child: ElevatedButton.icon(
-                icon: const Icon(Icons.library_music),
+                icon: const Icon(Icons.library_music , color: blackColor,),
                 onPressed: _addNewSong,
-                label: const Text('Add Song'),
+                label: Text('Add Song', style: myTextStyle(blackColor , FontWeight.bold),),
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
@@ -378,13 +378,14 @@ class MetadataSelectionState extends State<AddSongScreen> {
             const SizedBox(
               height: 15.0,
             ),
-            TextButton(
+            TextButton.icon(
+              icon: const Icon(Icons.transit_enterexit, color: buttonColor,),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
-                "Back/Exit",
-                style: myTextStyle(whiteColor),
+              label: const Text(
+                "Go Back",
+                style: TextStyle(fontSize: 18, color: whiteColor),
               ),
             )
           ]),

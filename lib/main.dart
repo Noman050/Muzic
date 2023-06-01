@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_app/screens/homeScreen.dart';
 import 'package:music_app/screens/meteDataRetriver.dart';
-import 'package:music_app/screens/songDownloadScreen.dart';
+import 'package:music_app/screens/settingsScreen.dart';
 
 import 'Models/myRoute.dart';
 import './screens/addSongScreen.dart';
@@ -31,7 +31,7 @@ class MusicListeningApp extends StatelessWidget {
         MyRoute.optionScreen: (context) => const OptionScreen(),
         MyRoute.homeScreen: (context) =>  const HomeScreen(),
         MyRoute.meta : (context) =>  const AudioMetadataScreen(),
-        MyRoute.songDownloadScreen : (context) => const SongDownloadScreen(),
+        MyRoute.settingsScreem: (context) => const SettingsScreen(),
       },
     );
   }

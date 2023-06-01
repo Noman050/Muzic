@@ -13,85 +13,93 @@ class OptionScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Card(
-              elevation: 50,
-              color: bgColor,
-              child:  Text(
-                "Select One",
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: whiteColor,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Card(
+                elevation: 50,
+                color: bgColor,
+                child:  Text(
+                  "Select One",
+                  style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: whiteColor,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Card(
-              elevation: 50,
-              color:bgColor,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
+              const SizedBox(
+                height: 50,
+              ),
+              Card(
+                elevation: 50,
+                color:bgColor,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                      minimumSize: const Size(190, 80),
+                      backgroundColor: buttonColor),
+                  icon: const Icon(Icons.add_to_drive, color: blackColor, size: 35,),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(MyRoute.addSongScreen);
+                  },
+                  label: const Text(
+                    "Add Song",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: blackColor),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Card(
+                elevation: 50,
+                color: bgColor,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.music_note_outlined ,color: blackColor, size: 35, ),
+                  style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
-                    minimumSize: const Size(250, 120),
-                    backgroundColor: buttonColor),
-                icon: const Icon(Icons.add_circle_outlined),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(MyRoute.addSongScreen);
-                },
-                label: const Text(
-                  "Add Song",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    minimumSize: const Size(190, 85),
+                    backgroundColor: buttonColor,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(MyRoute.homeScreen);
+                  },
+                  label: const Text(
+                    "Listen Songs",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: blackColor,),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Card(
-              elevation: 50,
-              color: bgColor,
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.music_note_outlined),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0)),
-                  minimumSize: const Size(250, 120),
-                  backgroundColor: buttonColor,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(MyRoute.homeScreen);
-                },
-                label: const Text(
-                  "Listen Songs",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Card(
-              elevation: 50,
-              color: bgColor,
-              child: TextButton.icon(
+              const SizedBox(height: 20),
+               Card(
+                elevation: 50,
+                color: bgColor,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.exit_to_app ,color: blackColor, size: 25, ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0)),
+                    minimumSize: const Size(110, 40),
+                    backgroundColor: buttonColor,
+                  ),
                   onPressed: () {
                     SystemNavigator.pop();
                   },
-                  icon: const Icon(Icons.exit_to_app, color: whiteColor),
-                  label: const Text("Exit",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: whiteColor,
-                          fontWeight: FontWeight.bold),),),
-            ),
-            ElevatedButton(onPressed: (){
-              Navigator.of(context).pushNamed(MyRoute.meta);
-            }, child: const Text("Meta"))
-          ],
+                  label: const Text(
+                    "Exit",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: blackColor,),
+                  ),
+                ),
+              ),
+              ElevatedButton(onPressed: (){
+                Navigator.of(context).pushNamed(MyRoute.meta);
+              }, child: const Text("Meta"))
+            ],
+          ),
         ),
       ),
     );

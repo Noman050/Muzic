@@ -32,7 +32,7 @@ class _HomeState extends State<HomeScreen> {
       drawer: const MyDrawer(),
       backgroundColor: bgDarkColor,
       appBar: AppBar(
-        backgroundColor: bgDarkColor,
+        backgroundColor: bgColor,
         actions: [
           IconButton(
             onPressed: (){
@@ -93,7 +93,7 @@ class _HomeState extends State<HomeScreen> {
       },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: bgDarkColor,
+        backgroundColor: bgColor,
         selectedItemColor: buttonColor,
         unselectedItemColor: whiteColor,
         items: const [
@@ -124,7 +124,7 @@ class _HomeState extends State<HomeScreen> {
           }
           else if(index==2){
             const MyDrawer();
-             Navigator.of(context).pushNamed(MyRoute.meta);            
+             Navigator.of(context).pushNamed(MyRoute.settingsScreem);            
           }
         },
     )

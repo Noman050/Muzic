@@ -59,7 +59,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       backgroundColor: bgDarkColor,
       drawer: const MyDrawer(),
       appBar: AppBar(
-        backgroundColor: bgDarkColor,
+        backgroundColor: bgColor,
         title: const Text('Playlist'),
         actions: [
           IconButton(
@@ -107,7 +107,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: bgDarkColor,
+        backgroundColor: bgColor,
         unselectedItemColor: whiteColor,
         selectedItemColor: buttonColor,
         currentIndex: 0,
@@ -121,7 +121,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-            backgroundColor: bgDarkColor,
+            backgroundColor: bgColor,
             icon: Icon(Icons.playlist_play),
             label: 'Current PlayList',
           ),
