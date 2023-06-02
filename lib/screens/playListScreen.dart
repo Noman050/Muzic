@@ -19,6 +19,7 @@ class PlaylistScreen extends StatefulWidget {
 
 class _PlaylistScreenState extends State<PlaylistScreen> {
   List<SongModel> playlist = [];
+  
 
   @override
   void initState() {
@@ -59,6 +60,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       backgroundColor: bgDarkColor,
       drawer: const MyDrawer(),
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: buttonColor),
         backgroundColor: bgColor,
         title: const Text('Playlist'),
         actions: [

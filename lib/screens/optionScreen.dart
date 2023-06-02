@@ -95,9 +95,12 @@ class OptionScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              ElevatedButton(onPressed: (){
+              const SizedBox(height: 100),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: bgColor),
+                onPressed: (){
                 Navigator.of(context).pushNamed(MyRoute.meta);
-              }, child: const Text("Meta"))
+              }, child:  const Text("Meta Data Test Screen"))
             ],
           ),
         ),

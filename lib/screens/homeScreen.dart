@@ -32,6 +32,7 @@ class _HomeState extends State<HomeScreen> {
       drawer: const MyDrawer(),
       backgroundColor: bgDarkColor,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: buttonColor),
         backgroundColor: bgColor,
         actions: [
           IconButton(
@@ -42,7 +43,7 @@ class _HomeState extends State<HomeScreen> {
               );
           }, icon: const Icon(Icons.search , color: buttonColor,)),
         ],
-        title: Text("Music Listening App" , style: myStyle(family: bold, size: 18,),),
+        title: const Text("Music Listening App" , style: TextStyle(fontSize: 18, letterSpacing: 1),),
       ),
       body: 
         FutureBuilder<List<SongModel>>(

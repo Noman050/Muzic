@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import '../Models/myRoute.dart';
 import '../consts/colors.dart';
 
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
   
@@ -24,7 +25,7 @@ class MyDrawer extends StatelessWidget {
             style: TextStyle(
               color: whiteColor,
               fontSize: 22,
-              letterSpacing: 2,
+              letterSpacing: 1,
             ),
           ),
         ),
@@ -37,13 +38,13 @@ class MyDrawer extends StatelessWidget {
           // Update the state of the app
           // ...
           // Then close the drawer
-          Navigator.pop(context);
+       
         },
       ),
       const Divider(color: white30Color),
       ListTile(
         leading: const Icon(Icons.settings, color: buttonColor,),
-        title: const Text('Download Songs', style: TextStyle(color: whiteColor),),
+        title: const Text('Download Songs', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           Navigator.of(context).pushNamed(MyRoute.meta);
           // Update the state of the app
@@ -54,7 +55,7 @@ class MyDrawer extends StatelessWidget {
       const Divider(color: white30Color),
       ListTile(
         leading: const Icon(Icons.lock, color:  buttonColor,),
-        title: const Text('Lockscreen', style: TextStyle(color: whiteColor),),
+        title: const Text('Lockscreen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           // Update the state of the app
           // ...
@@ -64,30 +65,19 @@ class MyDrawer extends StatelessWidget {
       ),
       const Divider(color: white30Color),
       ListTile(
-        leading: const Icon(Icons.more_horiz, color:  buttonColor,),
-        title: const Text('Other', style: TextStyle(color: whiteColor),),
+        leading: const Icon(Icons.library_music, color:  buttonColor,),
+        title: const Text('Add Song', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           // Update the state of the app
           // ...
           // Then close the drawer
-          Navigator.pop(context);
-        },
-      ),
-      const Divider(color:white30Color),
-      ListTile(
-        leading: const Icon(Icons.switch_camera, color:  buttonColor,),
-        title: const Text('Switch Screen Mode', style: TextStyle(color: whiteColor),),
-        onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-          Navigator.pop(context);
+          Navigator.of(context).pushNamed(MyRoute.addSongScreen);
         },
       ),
       const Divider(color: white60Color),
       ListTile(
-        leading: const Icon(Icons.home_max_outlined, color:  buttonColor,),
-        title: const Text('Home Screen', style: TextStyle(color: whiteColor),),
+        leading: const Icon(Icons.add_to_home_screen_rounded, color:  buttonColor,),
+        title: const Text('Option Screen Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           Navigator.of(context).pushNamed(MyRoute.optionScreen);
          

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import '../consts/colors.dart';
-import '../screens/optionScreen.dart';
+import 'homeScreen.dart';
 class MySplashScreen extends StatelessWidget {
   const MySplashScreen({super.key});
 
@@ -11,7 +11,7 @@ class MySplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 2,
-        navigateAfterSeconds: const OptionScreen(),
+        navigateAfterSeconds: const HomeScreen(),
         image: Image.asset(
           "assets/images/logo.jpg",
           fit: BoxFit.cover,

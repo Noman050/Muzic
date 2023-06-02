@@ -17,6 +17,11 @@ class AddSongScreen extends StatefulWidget {
 }
 
 class MetadataSelectionState extends State<AddSongScreen> {
+  String strArtist ="Select Artist";
+  String strYear ="Select Year";
+  String strAlbum ="Select Album";
+  String strGenre ="Select Genre";
+  String strTempo ="Select Tempo";
   File? _audioFile;
   String? _selectedArtist;
   String _selectedYear = "2000";
@@ -123,6 +128,7 @@ class MetadataSelectionState extends State<AddSongScreen> {
         backgroundColor: bgColor,
         centerTitle: true,
         title: const Text("Add Song"),
+        iconTheme: const IconThemeData(color: buttonColor),
       ),
       body: Container(
         color: bgColor,
@@ -135,22 +141,31 @@ class MetadataSelectionState extends State<AddSongScreen> {
             ),
             const SizedBox(height: 10.0),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50),
+              padding: const EdgeInsets.only(left: 100, right: 100),
               child: DropdownButton<String>(
-                hint: const Text("Select Artist"),
+                dropdownColor: bgColor,
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                icon: const Icon(Icons.keyboard_double_arrow_down, color: buttonColor,),
+                elevation: 4,
+                isExpanded: true,
+                // value: _selectedArtist,
+                style:  TextStyle( foreground: Paint()..style =PaintingStyle.fill ..strokeWidth=6 ..color= whiteColor ),
+                hint:  Text(strArtist),
                 items: _artists.map((String value) {
                   return DropdownMenuItem<String>(
-                  
                     value: value,
                     child: Text(value),
                   );
                 }).toList(),
                 onChanged: (newValue) {
                   setState(() {
+                    
                     _selectedArtist = newValue!;
+                    
                   });
-
+                  strArtist = newValue.toString();
                 },
+               
               ),
             ),
             Padding(
@@ -201,10 +216,16 @@ class MetadataSelectionState extends State<AddSongScreen> {
             Text('Select Year of Release', style: myTextStyle(whiteColor, FontWeight.bold)),
             const SizedBox(height: 10.0),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50),
+              padding: const EdgeInsets.only(left: 100, right: 90),
               child: DropdownButton<String>(
-                hint: const Text('Select Year'),
-               // value: _selectedYear,
+                dropdownColor: bgColor,
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                icon: const Icon(Icons.keyboard_double_arrow_down, color: buttonColor,),
+                elevation: 4,
+                isExpanded: true,
+                // value: _selectedArtist,
+                style:  TextStyle( foreground: Paint()..style =PaintingStyle.fill ..strokeWidth=6 ..color= whiteColor ),
+                hint:  Text(strYear),
                 items: _years.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -213,10 +234,13 @@ class MetadataSelectionState extends State<AddSongScreen> {
                 }).toList(),
                 onChanged: (newValue) {
                   setState(() {
-                     _selectedYear = newValue!;
+                    
+                    _selectedYear = newValue!;
+                    
                   });
-                 
+                  strYear = newValue.toString();
                 },
+               
               ),
             ),
             Padding(
@@ -264,10 +288,16 @@ class MetadataSelectionState extends State<AddSongScreen> {
             Text('Select Album', style: myTextStyle(whiteColor, FontWeight.bold)),
             const SizedBox(height: 10.0),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50),
-              child: DropdownButton<String>(
-                hint: const Text('Select Album'),
-                // value: _selectedAlbum,
+              padding: const EdgeInsets.only(left: 100, right: 90),
+              child:DropdownButton<String>(
+                dropdownColor: bgColor,
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                icon: const Icon(Icons.keyboard_double_arrow_down, color: buttonColor,),
+                elevation: 4,
+                isExpanded: true,
+                // value: _selectedArtist,
+                style:  TextStyle( foreground: Paint()..style =PaintingStyle.fill ..strokeWidth=6 ..color= whiteColor ),
+                hint:  Text(strAlbum),
                 items: _albums.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -276,10 +306,13 @@ class MetadataSelectionState extends State<AddSongScreen> {
                 }).toList(),
                 onChanged: (newValue) {
                   setState(() {
+                    
                     _selectedAlbum = newValue!;
+                    
                   });
-                  
+                  strAlbum = newValue.toString();
                 },
+               
               ),
             ),
             Padding(
@@ -330,10 +363,16 @@ class MetadataSelectionState extends State<AddSongScreen> {
             Text('Select Genre', style: myTextStyle(whiteColor, FontWeight.bold)),
             sizedBox10(),
             Padding(
-              padding: const EdgeInsets.only(left: 50, right: 50),
+              padding: const EdgeInsets.only(left: 100, right: 90),
               child: DropdownButton<String>(
-                hint: const Text('Select Genre'),
-                // value: _selectedGenre,
+                dropdownColor: bgColor,
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                icon: const Icon(Icons.keyboard_double_arrow_down, color: buttonColor,),
+                elevation: 4,
+                isExpanded: true,
+                // value: _selectedArtist,
+                style:  TextStyle( foreground: Paint()..style =PaintingStyle.fill ..strokeWidth=6 ..color= whiteColor ),
+                hint:  Text(strGenre),
                 items: _genres.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -342,14 +381,16 @@ class MetadataSelectionState extends State<AddSongScreen> {
                 }).toList(),
                 onChanged: (newValue) {
                   setState(() {
-                     _selectedGenre = newValue!;
+                    
+                    _selectedGenre = newValue!;
+                    
                   });
+                  strGenre = newValue.toString();
                 },
+               
               ),
             ),
-            sizedBox10(),
-            Text('Select Tempo', style: myTextStyle(whiteColor , FontWeight.bold)),
-            sizedBox10(),
+            const SizedBox(height: 40,),
             Padding(
               padding: const EdgeInsets.only(left: 100, right: 90),
               child: ElevatedButton.icon(

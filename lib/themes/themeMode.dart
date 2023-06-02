@@ -4,7 +4,7 @@
 
 ThemeData myThemeData() {
     return ThemeData(
-      fontFamily: "regular",
+      fontFamily: "bold",
       primarySwatch: Colors.blue,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
