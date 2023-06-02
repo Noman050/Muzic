@@ -119,7 +119,8 @@ class _HomeState extends State<HomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-               builder: (context) => PlaylistScreen(data: dataForSearch.data as List<SongModel>),
+              //  builder: (context) => PlaylistScreen(data: dataForSearch.data as List<SongModel>),
+                 builder: (context) =>  PlaylistScreen(data: dataForSearch.data as List<SongModel>),
               ),
             );
           }

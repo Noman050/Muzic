@@ -68,7 +68,7 @@ class _MyDrawerState extends State<MyDrawer> {
         leading: const Icon(Icons.settings, color: buttonColor,),
         title: const Text('Settings Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
-          Navigator.of(context).pushNamed(MyRoute.meta);
+          Navigator.of(context).pushNamed(MyRoute.settingsScreem);
           // Update the state of the app
           // ...
           // Then close the drawer

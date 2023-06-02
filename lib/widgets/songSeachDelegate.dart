@@ -17,8 +17,7 @@ class SongSearchDelegate extends SearchDelegate<String> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        color: buttonColor,
-        icon: const Icon(Icons.clear),
+        icon: const Icon(Icons.clear, color: redColor,),
         onPressed: () {
           query = '';
         },
@@ -29,8 +28,7 @@ class SongSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      color: buttonColor,
-      icon: const Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back, color: buttonColor,),
       onPressed: () {
         close(context, '');
       },
@@ -59,6 +57,7 @@ class SongSearchDelegate extends SearchDelegate<String> {
               textColor: whiteColor,
               title: Text(song.displayNameWOExt),
               subtitle: Text(song.artist.toString()),
+              leading: QueryArtworkWidget(id: song.id, type: ArtworkType.AUDIO, nullArtworkWidget: const Icon(Icons.music_note, color: whiteColor, size: 32,),),
               onTap: () {
               final playerController = Get.find<PlayerController>();
                 playerController.playSong(song.uri, index, data);
@@ -101,6 +100,7 @@ class SongSearchDelegate extends SearchDelegate<String> {
               textColor: whiteColor,
               title: Text(song.displayNameWOExt),
               subtitle: Text(song.artist.toString()),
+              leading: QueryArtworkWidget(id: song.id, type: ArtworkType.AUDIO, nullArtworkWidget: const Icon(Icons.music_note, color: whiteColor, size: 32,),),
               onTap: () {
               final playerController = Get.find<PlayerController>();
                 playerController.playSong(song.uri, index, data);
