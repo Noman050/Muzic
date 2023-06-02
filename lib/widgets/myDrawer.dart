@@ -1,14 +1,34 @@
 // ignore_for_file: file_names
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 import '../Models/myRoute.dart';
 import '../consts/colors.dart';
+import '../controllers/playerController.dart';
+import '../screens/playerScreen.dart';
 
-
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
-  
+
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
+
+
+    Future<void> selectAudioFile() async {
+
+    await FilePicker.platform.pickFiles(
+      type: FileType.audio,
+
+    );
+    }
+
     return Drawer(
       shadowColor: buttonColor,
       backgroundColor: bgColor,
@@ -35,6 +55,8 @@ class MyDrawer extends StatelessWidget {
         leading: const Icon(Icons.audiotrack, color: buttonColor,),
         title: const Text('Audio', style: TextStyle(color: whiteColor),),
         onTap: () {
+
+          selectAudioFile();
           // Update the state of the app
           // ...
           // Then close the drawer
@@ -44,7 +66,7 @@ class MyDrawer extends StatelessWidget {
       const Divider(color: white30Color),
       ListTile(
         leading: const Icon(Icons.settings, color: buttonColor,),
-        title: const Text('Download Songs', style: TextStyle(color: whiteColor, letterSpacing: 1),),
+        title: const Text('Settings Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           Navigator.of(context).pushNamed(MyRoute.meta);
           // Update the state of the app
@@ -83,6 +105,16 @@ class MyDrawer extends StatelessWidget {
          
         },
       ),
+      const Divider(color: white30Color),
+      ListTile(
+              leading: const Icon(Icons.info, color: buttonColor,),
+              title: const Text('App Version', style: TextStyle(color: whiteColor)  ),
+              subtitle: const Text('1.0.0', style: TextStyle(color: whiteColor),),
+              onTap: () {
+                // TODO: Handle app version tap
+              },
+            ),
+      const Divider(color: white30Color),
     ]
   ),
 );
