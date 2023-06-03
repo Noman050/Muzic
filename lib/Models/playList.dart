@@ -8,3 +8,15 @@ class PlaylistModel {
 
   PlaylistModel({required this.name, required this.songs});
 }
+
+class WeeklySongReport {
+  final SongModel song;
+  final DateTime playDateTime;
+  final int duration;
+
+  WeeklySongReport({
+    required this.song,
+    required this.playDateTime,
+    required this.duration,
+  });
+}

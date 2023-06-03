@@ -39,7 +39,11 @@ class SongSearchDelegate extends SearchDelegate<String> {
   
   Widget buildResults(BuildContext context) {
     // Perform search and display results
-    final List<SongModel> searchResults = data.where((song) => song.displayNameWOExt.toLowerCase().contains(query.toLowerCase())).toList();
+    final List<SongModel> searchResults = data
+      .where((song) =>
+          song.displayNameWOExt.toLowerCase().contains(query.toLowerCase()) ||
+          song.artist.toString().toLowerCase().contains(query.toLowerCase()))
+      .toList();
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -81,7 +85,11 @@ class SongSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     // Display suggestions as the user types
-    final List<SongModel> suggestions = data.where((song) => song.displayNameWOExt.toLowerCase().contains(query.toLowerCase())).toList();
+    final List<SongModel> suggestions = data
+      .where((song) =>
+          song.displayNameWOExt.toLowerCase().contains(query.toLowerCase()) ||
+          song.artist.toString().toLowerCase().contains(query.toLowerCase()))
+      .toList();
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

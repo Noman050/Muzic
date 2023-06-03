@@ -1,9 +1,12 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:on_audio_query/on_audio_query.dart';
+
 import 'package:music_app/consts/colors.dart';
 import 'package:music_app/consts/myTextStyle.dart';
 import 'package:music_app/controllers/playerController.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class PlayerScreen extends StatelessWidget {
   final List<SongModel> data;
@@ -196,6 +199,7 @@ class PlayerScreen extends StatelessWidget {
                               color: controller.isRepeat.value ? blackColor : controller.isShuffle.value ? buttonColor : blackColor,
                             ),
                           ),
+                          
                         ],
                       ),
                     ],

@@ -13,12 +13,12 @@ class MySplashScreen extends StatelessWidget {
         seconds: 2,
         navigateAfterSeconds: const HomeScreen(),
         image: Image.asset(
-          "assets/images/logo.jpg",
+          "assets/images/logo.png",
           fit: BoxFit.cover,
         ),
-        backgroundColor: splashColor,
+        backgroundColor: bgColor,
         styleTextUnderTheLoader: const TextStyle(),
-        photoSize: 70.0,
+        photoSize: 150.0,
         loaderColor: whiteColor);
   }
 }
