@@ -55,12 +55,7 @@ class _MyDrawerState extends State<MyDrawer> {
         leading: const Icon(Icons.audiotrack, color: buttonColor,),
         title: const Text('Audio', style: TextStyle(color: whiteColor),),
         onTap: () {
-
           selectAudioFile();
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-       
         },
       ),
       const Divider(color: white30Color),
@@ -69,37 +64,28 @@ class _MyDrawerState extends State<MyDrawer> {
         title: const Text('Settings Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           Navigator.of(context).pushNamed(MyRoute.settingsScreem);
-          // Update the state of the app
-          // ...
-          // Then close the drawer
         },
       ),
       const Divider(color: white30Color),
       ListTile(
-        leading: const Icon(Icons.lock, color:  buttonColor,),
-        title: const Text('Lockscreen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
+        leading: const Icon(Icons.description , color:  buttonColor,),
+        title: const Text('Check Report', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
-          Navigator.pop(context);
-        },
+            Navigator.of(context).pushNamed(MyRoute.reportScreen);
+            }
       ),
       const Divider(color: white30Color),
       ListTile(
         leading: const Icon(Icons.library_music, color:  buttonColor,),
         title: const Text('Add Song', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
-          // Update the state of the app
-          // ...
-          // Then close the drawer
           Navigator.of(context).pushNamed(MyRoute.addSongScreen);
         },
       ),
       const Divider(color: white60Color),
       ListTile(
         leading: const Icon(Icons.add_to_home_screen_rounded, color:  buttonColor,),
-        title: const Text('Option Screen Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
+        title: const Text('Option Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
           Navigator.of(context).pushNamed(MyRoute.optionScreen);
          
@@ -111,7 +97,6 @@ class _MyDrawerState extends State<MyDrawer> {
               title: const Text('App Version', style: TextStyle(color: whiteColor)  ),
               subtitle: const Text('1.0.0', style: TextStyle(color: whiteColor),),
               onTap: () {
-                // TODO: Handle app version tap
               },
             ),
       const Divider(color: white30Color),

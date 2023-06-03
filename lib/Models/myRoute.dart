@@ -11,6 +11,7 @@ class MyRoute {
   static String genreScreen = "/genreScreen";
   static String playSongScreen="/playSongScreen";
   static String songDownloadScreen="/songDownloadScreen";
+  static String reportScreen="/reportScreen";
   static String homeScreen="/homeScreen";
   static String meta="/meta";
   static String settingsScreem="/settingsScreem";

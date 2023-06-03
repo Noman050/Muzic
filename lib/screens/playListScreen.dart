@@ -241,7 +241,7 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
     );
 
     if (confirmDelete == true) {
-      setState(() async {
+      setState(() {
         playlist.songs.remove(song);
       });
     }

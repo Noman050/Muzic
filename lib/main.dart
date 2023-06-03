@@ -9,6 +9,8 @@ import './screens/addSongScreen.dart';
 import './screens/mySplashScreen.dart';
 import './screens/optionScreen.dart';
 import './themes/themeMode.dart';
+import 'screens/weeklyReportScreen.dart';
+
 
 void main() {
   runApp(const MusicListeningApp());
@@ -32,6 +34,7 @@ class MusicListeningApp extends StatelessWidget {
         MyRoute.homeScreen: (context) =>  const HomeScreen(),
         MyRoute.meta : (context) =>  const AudioMetadataScreen(),
         MyRoute.settingsScreem: (context) => const SettingsScreen(),
+        MyRoute.reportScreen: (context) =>  WeeklyReportScreen(),
       },
     );
   }

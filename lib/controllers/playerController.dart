@@ -7,7 +7,9 @@ import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+
 class PlayerController extends GetxController {
+
   final audioQuery = OnAudioQuery();
   final audioPlayer = AudioPlayer();
 
@@ -22,6 +24,34 @@ class PlayerController extends GetxController {
 
   var isRepeat = false.obs;
   var isShuffle = false.obs;
+
+  var playedSongs = <SongModel>[].obs;
+  var playedDate = [];
+
+  playSong(String? uri, int index, List<SongModel> data) async {
+  playIndex.value = index;
+  isPlaying.value = true;
+  try {
+    await audioPlayer.stop();
+    audioPlayer.setAudioSource(
+      AudioSource.uri(
+        Uri.parse(uri!),
+      ),
+    );
+    await audioPlayer.play();
+    isPlaying(true);
+    updatePosition(data);
+
+    // Add the played song to the playedSongs list
+    final playedSong = data[index];
+    playedSongs.add(playedSong);
+    playedDate.add(DateTime.now());
+    
+  } on Exception catch (e) {
+    e.obs;
+  }
+}
+
 
   updatePosition(List<SongModel> data) {
     audioPlayer.durationStream.listen((d) {
@@ -64,23 +94,23 @@ class PlayerController extends GetxController {
     audioPlayer.seek(duration);
   }
 
-  playSong(String? uri, int index, List<SongModel> data) async {
-    playIndex.value = index;
-    isPlaying.value = true;
-    try {
-      await audioPlayer.stop();
-      audioPlayer.setAudioSource(
-        AudioSource.uri(
-          Uri.parse(uri!),
-        ),
-      );
-      await audioPlayer.play();
-      isPlaying(true);
-      updatePosition(data);
-    } on Exception catch (e) {
-      e.obs;
-    }
-  }
+  // playSong(String? uri, int index, List<SongModel> data) async {
+  //   playIndex.value = index;
+  //   isPlaying.value = true;
+  //   try {
+  //     await audioPlayer.stop();
+  //     audioPlayer.setAudioSource(
+  //       AudioSource.uri(
+  //         Uri.parse(uri!),
+  //       ),
+  //     );
+  //     await audioPlayer.play();
+  //     isPlaying(true);
+  //     updatePosition(data);
+  //   } on Exception catch (e) {
+  //     e.obs;
+  //   }
+  // }
 
   checkPermissions() async {
     var perm = await Permission.storage.request();
