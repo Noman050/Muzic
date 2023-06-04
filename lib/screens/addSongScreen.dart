@@ -21,7 +21,6 @@ class MetadataSelectionState extends State<AddSongScreen> {
   String strYear ="Select Year";
   String strAlbum ="Select Album";
   String strGenre ="Select Genre";
-  String strTempo ="Select Tempo";
   File? _audioFile;
   String? _selectedArtist;
   String _selectedYear = "2000";

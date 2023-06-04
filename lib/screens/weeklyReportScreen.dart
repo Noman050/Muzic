@@ -1,13 +1,16 @@
+// ignore_for_file: file_names, must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music_app/consts/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:open_file/open_file.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
-import 'package:intl/intl.dart';
+import 'package:pdf/widgets.dart' as pw;
+
+import 'package:music_app/consts/colors.dart';
 
 import '../controllers/playerController.dart';
 
@@ -23,19 +26,15 @@ class WeeklyReportData {
 
 class WeeklyReportScreen extends StatelessWidget {
   final PlayerController controller = Get.find();
-
+  var datePlayedName;
   WeeklyReportScreen({super.key});
 
   Future<String> generatePdfReport(List<WeeklyReportData> weeklyReports) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final outputDir = directory.path;
-    final List<String> fileNames = [];
+    final pdf = pw.Document();
 
-    // Generate a PDF report for each week
+    // Generate a PDF report for each weekF
     for (int i = 0; i < weeklyReports.length; i++) {
       final weeklyReport = weeklyReports[i];
-      final firstDayOfWeek = weeklyReport.playedDate.first;
-      final pdf = pw.Document();
 
       // Add a title to the PDF report
       pdf.addPage(
@@ -43,7 +42,7 @@ class WeeklyReportScreen extends StatelessWidget {
           build: (pw.Context context) {
             return pw.Center(
               child: pw.Text(
-                'Weekly Report ${i + 1}',
+                'Weekly Report ${datePlayedName.toString()}',
                 style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold),
               ),
             );
@@ -52,37 +51,34 @@ class WeeklyReportScreen extends StatelessWidget {
       );
 
       // Add the played songs to the PDF report
-      final List<pw.Widget> songWidgets = [];
       for (int j = 0; j < weeklyReport.playedSongs.length; j++) {
         final song = weeklyReport.playedSongs[j];
         final datePlayed = weeklyReport.playedDate[j];
+        datePlayedName = datePlayed;
 
-        songWidgets.add(
-          pw.Column(
-            children: [
-              pw.Text('Song: ${song.title}'),
-              pw.Text('Artist: ${song.artist}'),
-              pw.Text('Date Played: $datePlayed'),
-              pw.SizedBox(height: 10),
-            ],
+        pdf.addPage(
+          pw.Page(
+            build: (pw.Context context) {
+              return pw.Column(
+                children: [
+                  pw.Text('Song: ${song.title}'),
+                  pw.Text('Artist: ${song.artist}'),
+                  pw.Text('Date Played: $datePlayed'),
+                  pw.SizedBox(height: 10),
+                ],
+              );
+            },
           ),
         );
       }
-      pdf.addPage(
-        pw.Page(
-          build: (pw.Context context) {
-            return pw.ListView(children: songWidgets);
-          },
-        ),
-      );
-
-      // Save the PDF report to a file
-      final outputFile = File('$outputDir/weekly_report_$firstDayOfWeek.pdf');
-      await outputFile.writeAsBytes(await pdf.save());
-      fileNames.add(outputFile.path);
     }
 
-    return fileNames.join(',');
+    // Save the PDF report to a file
+    final outputDir = await getExternalStorageDirectory();
+    final outputFile = File('${outputDir!.path}/${datePlayedName.toString()}.pdf');
+    await outputFile.writeAsBytes(await pdf.save());
+
+    return outputFile.path;
   }
 
   void viewPdfReport(String filePath) {
@@ -90,12 +86,12 @@ class WeeklyReportScreen extends StatelessWidget {
       OpenFile.open(filePath);
     }
   }
-  Future<void> openFile() async {
+   Future<void> openFile() async {
     await FilePicker.platform.pickFiles(
       initialDirectory: '/data/user/0/com.example.music_app/app_flutter/',
       type: FileType.any,
     );
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,28 +99,21 @@ class WeeklyReportScreen extends StatelessWidget {
       backgroundColor: bgDarkColor,
       appBar: AppBar(
         actions: [
-          controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty ? IconButton(onPressed: () async{
+            controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty ? IconButton(onPressed: () async{
             final weeklyReportData = WeeklyReportData(
-                    playedSongs: controller.playedSongs.toList(),
-                    playedDate: controller.playedDate.map<DateTime>((dynamic date) => date as DateTime).toList(),
-                  );
-
-                  // Generate the PDF report
-                  final filePaths = await generatePdfReport([weeklyReportData]);
-                  final fileNames = filePaths.split(',');
-                  if (fileNames.isNotEmpty) {
-                    for (final fileName in fileNames) {
-                      viewPdfReport(fileName);
-                    }
-                  }
-          }, icon: const Icon(Icons.view_array, color: buttonColor,),
-          ) : const Text(""),
+                playedSongs: controller.playedSongs.toList(),
+                playedDate: controller.playedDate.map<DateTime>((dynamic date) => date as DateTime).toList(),
+              );
+              // Generate the PDF report
+              final filePath = await generatePdfReport([weeklyReportData]);
+              viewPdfReport(filePath);
+          }, icon: const Icon(Icons.picture_as_pdf_sharp, color: buttonColor,)) : const Text(""),
         ],
         backgroundColor: bgColor,
         title: const Text('Weekly Report'),
       ),
-      body:
-            controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty ? ListView.builder(
+      body: controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty
+          ? ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: controller.playedSongs.length,
               itemBuilder: (context, index) {
@@ -170,8 +159,6 @@ class WeeklyReportScreen extends StatelessWidget {
                  }, icon: const Icon(Icons.file_open, color: buttonColor,))
               ],
             )
-            
     );
-    
   }
 }
