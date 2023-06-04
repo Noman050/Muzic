@@ -124,7 +124,6 @@ class MetadataSelectionState extends State<AddSongScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: bgColor,
         centerTitle: true,
         title: const Text("Add Song"),
         iconTheme: const IconThemeData(color: buttonColor),

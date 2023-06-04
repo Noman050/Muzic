@@ -10,7 +10,7 @@ class MySplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-        seconds: 2,
+        seconds: 3,
         navigateAfterSeconds: const HomeScreen(),
         image: Image.asset(
           "assets/images/logo.png",

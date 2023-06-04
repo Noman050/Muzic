@@ -1,14 +1,17 @@
  // ignore_for_file: file_names
 
  import 'package:flutter/material.dart';
+import 'package:music_app/consts/colors.dart';
 
 ThemeData myThemeData() {
     return ThemeData(
       fontFamily: "bold",
-      primarySwatch: Colors.blue,
+      scaffoldBackgroundColor: bgDarkColor,
+      buttonTheme: const ButtonThemeData(buttonColor: buttonColor),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
-        elevation: 0, 
+        iconTheme: IconThemeData(color: buttonColor),
+        backgroundColor: bgColor,
+        elevation: 10, 
       )
     );
   }

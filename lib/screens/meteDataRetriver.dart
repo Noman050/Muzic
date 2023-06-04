@@ -67,7 +67,6 @@ class _AudioMetadataScreenState extends State<AudioMetadataScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Audio Metadata'),
-        backgroundColor: bgDarkColor,
       ),
       body: Center(
         child: Column(

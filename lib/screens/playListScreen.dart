@@ -146,11 +146,8 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgDarkColor,
       drawer: const MyDrawer(),
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: buttonColor),
-        backgroundColor: bgColor,
         title: const Text('Playlists'),
         actions: [
           IconButton(

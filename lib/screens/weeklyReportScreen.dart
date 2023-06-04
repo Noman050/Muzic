@@ -96,7 +96,6 @@ class WeeklyReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgDarkColor,
       appBar: AppBar(
         actions: [
             controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty ? IconButton(onPressed: () async{
@@ -109,7 +108,6 @@ class WeeklyReportScreen extends StatelessWidget {
               viewPdfReport(filePath);
           }, icon: const Icon(Icons.picture_as_pdf_sharp, color: buttonColor,)) : const Text(""),
         ],
-        backgroundColor: bgColor,
         title: const Text('Weekly Report'),
       ),
       body: controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty
@@ -153,7 +151,7 @@ class WeeklyReportScreen extends StatelessWidget {
             ) : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
-                 const Center(child:  Text("Empty File, No Song is played yet !", style: TextStyle(color: whiteColor),),),
+                 const Center(child:  Text("Empty File, No Song Is Played Yet Today!", style: TextStyle(color: whiteColor),),),
                  IconButton(onPressed: (){
                   openFile();
                  }, icon: const Icon(Icons.file_open, color: buttonColor,))

@@ -30,10 +30,7 @@ class _HomeState extends State<HomeScreen> {
     late AsyncSnapshot<List<SongModel>> dataForSearch;
     return  Scaffold(
       drawer: const MyDrawer(),
-      backgroundColor: bgDarkColor,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: buttonColor),
-        backgroundColor: bgColor,
         actions: [
           IconButton(
             onPressed: (){

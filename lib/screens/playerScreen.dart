@@ -17,8 +17,7 @@ class PlayerScreen extends StatelessWidget {
     var controller = Get.find<PlayerController>();
 
     return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(),
+      appBar: AppBar( centerTitle: true,title: const Text("Now Playing"),),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
         child: Column(
