@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -8,47 +6,73 @@ import 'package:music_app/consts/colors.dart';
 import 'package:music_app/consts/myTextStyle.dart';
 import 'package:music_app/controllers/playerController.dart';
 
-class PlayerScreen extends StatelessWidget {
+class PlayerScreen extends StatefulWidget {
   final List<SongModel> data;
+
   const PlayerScreen({Key? key, required this.data}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var controller = Get.find<PlayerController>();
+  _PlayerScreenState createState() => _PlayerScreenState();
+}
 
+class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderStateMixin {
+  final PlayerController controller = Get.find<PlayerController>();
+  late final AnimationController rotationController;
+
+  @override
+  void initState() {
+    super.initState();
+    rotationController = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    rotationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( centerTitle: true,title: const Text("Now Playing"),),
+      appBar: AppBar(centerTitle: true, title: const Text("Now Playing")),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
         child: Column(
           children: [
-            Obx(
-              () => Expanded(
-                child: Container(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  height: 300,
-                  width: 300,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  alignment: Alignment.center,
-                  child: QueryArtworkWidget(
-                    id: data[controller.playIndex.value].id,
+            Expanded(
+              child: Container(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                height: 300,
+                width: 300,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: RotationTransition(
+                  turns: Tween(begin: 0.0, end: 1.0).animate(rotationController),
+                  child:  QueryArtworkWidget(
+                    id: 0,
                     type: ArtworkType.AUDIO,
                     artworkHeight: double.infinity,
                     artworkWidth: double.infinity,
-                    nullArtworkWidget: const Icon(
-                      Icons.music_note,
-                      size: 48,
-                      color: whiteColor,
+                    nullArtworkWidget: Container(
+                      decoration: const BoxDecoration(color: buttonColor ,borderRadius: BorderRadius.all(Radius.circular(200))),
+                      child: const Icon(
+                        Icons.music_note_rounded,
+                        size: 300,
+                        color: whiteColor,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-
-            const SizedBox(height: 12,),
-
+            const SizedBox(
+              height: 12,
+            ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(12),
@@ -57,37 +81,35 @@ class PlayerScreen extends StatelessWidget {
                   color: whiteColor,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
-
                 child: Obx(
                   () => Column(
                     children: [
                       Text(
-                        data[controller.playIndex.value].displayNameWOExt.toString(),
+                        widget.data[controller.playIndex.value].displayNameWOExt.toString(),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: myStyle(color: bgDarkColor, family: bold, size: 24),
                       ),
-
-                      const SizedBox(height: 12,),
-
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Text(
-                        data[controller.playIndex.value].artist.toString(),
+                        widget.data[controller.playIndex.value].artist.toString(),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: myStyle(color: bgDarkColor, family: regular, size: 20),
                       ),
-
-                      const SizedBox(height: 12,),
-
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Row(
                         children: [
                           Text(
                             controller.position.value,
                             style: myStyle(color: bgDarkColor),
                           ),
-
                           Expanded(
                             child: Slider(
                               thumbColor: blackColor,
@@ -102,25 +124,22 @@ class PlayerScreen extends StatelessWidget {
                               },
                             ),
                           ),
-
                           Text(
                             controller.duration.value,
                             style: myStyle(color: bgDarkColor),
                           ),
                         ],
                       ),
-
-                      const SizedBox(height: 12,),
-
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                           IconButton(
+                          IconButton(
                             onPressed: controller.toggleRepeat,
                             icon: Icon(
-                              controller.isRepeat.value
-                                  ? Icons.repeat_one_rounded
-                                  : Icons.repeat_rounded,
+                              controller.isRepeat.value ? Icons.repeat_one_rounded : Icons.repeat_rounded,
                               size: 38,
                               color: blackColor,
                             ),
@@ -129,13 +148,13 @@ class PlayerScreen extends StatelessWidget {
                             onPressed: () {
                               if (controller.playIndex.value > 0) {
                                 controller.playSong(
-                                  data[controller.playIndex.value - 1].uri,
+                                  widget.data[controller.playIndex.value - 1].uri,
                                   controller.playIndex.value - 1,
-                                  data,
+                                  widget.data,
                                 );
                               } else {
                                 controller.playIndex.value = 0;
-                                controller.playSong(data[0].uri, 0, data);
+                                controller.playSong(widget.data[0].uri, 0, widget.data);
                               }
                             },
                             icon: const Icon(
@@ -144,7 +163,6 @@ class PlayerScreen extends StatelessWidget {
                               color: blackColor,
                             ),
                           ),
-
                           Obx(
                             () => CircleAvatar(
                               radius: 35,
@@ -168,18 +186,17 @@ class PlayerScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-
                           IconButton(
                             onPressed: () {
-                              if (controller.playIndex.value < data.length - 1) {
+                              if (controller.playIndex.value < widget.data.length - 1) {
                                 controller.playSong(
-                                  data[controller.playIndex.value + 1].uri,
+                                  widget.data[controller.playIndex.value + 1].uri,
                                   controller.playIndex.value + 1,
-                                  data,
+                                  widget.data,
                                 );
                               } else {
                                 controller.playIndex.value = 0;
-                                controller.playSong(data[0].uri, 0, data);
+                                controller.playSong(widget.data[0].uri, 0, widget.data);
                               }
                             },
                             icon: const Icon(
@@ -191,14 +208,11 @@ class PlayerScreen extends StatelessWidget {
                           IconButton(
                             onPressed: controller.toggleShuffle,
                             icon: Icon(
-                               controller.isShuffle.value
-                                  ? Icons.shuffle_rounded
-                                  : Icons.shuffle_outlined,
+                              controller.isShuffle.value ? Icons.shuffle_rounded : Icons.shuffle_outlined,
                               size: 38,
                               color: controller.isRepeat.value ? blackColor : controller.isShuffle.value ? buttonColor : blackColor,
                             ),
                           ),
-                          
                         ],
                       ),
                     ],
