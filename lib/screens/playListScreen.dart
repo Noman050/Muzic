@@ -148,7 +148,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     return Scaffold(
       drawer: const MyDrawer(),
       appBar: AppBar(
-        title: const Text('Playlists'),
+        title: const Text('Playlists '),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),

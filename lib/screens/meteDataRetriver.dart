@@ -66,7 +66,7 @@ class _AudioMetadataScreenState extends State<AudioMetadataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Audio Metadata'),
+        title: const Text('Audio Metadata '),
       ),
       body: Center(
         child: Column(

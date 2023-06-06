@@ -21,7 +21,7 @@ class OptionScreen extends StatelessWidget {
                 elevation: 50,
                 color: bgColor,
                 child:  Text(
-                  "Select One",
+                  "Select One ",
                   style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,

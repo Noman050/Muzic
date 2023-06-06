@@ -71,7 +71,7 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
               ),
             ),
             const SizedBox(
-              height: 12,
+              height: 12, 
             ),
             Expanded(
               child: Container(
