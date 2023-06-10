@@ -119,6 +119,14 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                               max: controller.max.value,
                               value: controller.value.value,
                               onChanged: (newValue) {
+                                // Calculate the maximum allowed value
+                                final maxAllowedValue = controller.max.value - 1.0;
+                                // Check if the new value exceeds the maximum allowed value
+                                if (newValue > maxAllowedValue) {
+                                // If exceeded, set the value to the maximum allowed value
+                                newValue = maxAllowedValue;
+                                }
+                                // Update the value in the controller
                                 controller.changeDurationToSeconds(newValue.toInt());
                                 newValue = newValue;
                               },

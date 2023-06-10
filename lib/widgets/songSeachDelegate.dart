@@ -41,8 +41,8 @@ class SongSearchDelegate extends SearchDelegate<String> {
     // Perform search and display results
     final List<SongModel> searchResults = data
       .where((song) =>
-          song.displayNameWOExt.toLowerCase().contains(query.toLowerCase()) ||
-          song.artist.toString().toLowerCase().contains(query.toLowerCase()))
+          song.displayNameWOExt.toLowerCase().contains(query.trim().toLowerCase()) ||
+          song.artist.toString().toLowerCase().contains(query.trim().toLowerCase()))
       .toList();
 
     return Padding(
@@ -87,8 +87,8 @@ class SongSearchDelegate extends SearchDelegate<String> {
     // Display suggestions as the user types
     final List<SongModel> suggestions = data
       .where((song) =>
-          song.displayNameWOExt.toLowerCase().contains(query.toLowerCase()) ||
-          song.artist.toString().toLowerCase().contains(query.toLowerCase()))
+          song.displayNameWOExt.toLowerCase().contains(query.trim().toLowerCase()) ||
+          song.artist.toString().toLowerCase().contains(query.trim().toLowerCase()))
       .toList();
 
     return Padding(

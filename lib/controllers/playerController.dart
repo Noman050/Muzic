@@ -34,9 +34,8 @@ class PlayerController extends GetxController {
   try {
     await audioPlayer.stop();
     audioPlayer.setAudioSource(
-      AudioSource.uri(
-        Uri.parse(uri!),
-      ),
+      AudioSource.uri(Uri.parse(uri!)),
+      preload: true,
     );
     await audioPlayer.play();
     isPlaying(true);
@@ -46,42 +45,46 @@ class PlayerController extends GetxController {
     final playedSong = data[index];
     playedSongs.add(playedSong);
     playedDate.add(DateTime.now());
-    
   } on Exception catch (e) {
     e.obs;
   }
 }
 
 
-  updatePosition(List<SongModel> data) {
-    audioPlayer.durationStream.listen((d) {
-      duration.value = d.toString().split(".")[0];
-      max.value = d!.inSeconds.toDouble();
-    });
-    audioPlayer.positionStream.listen((p) {
-      position.value = p.toString().split(".")[0];
-      value.value = p.inSeconds.toDouble();
 
-      if (value.value >= max.value) {
-        audioPlayer.stop();
-        isPlaying(false);
-        // Play the next song based on repeat and shuffle modes
-        if (isRepeat.value) {
-          // Play the same song again
-          playSong(data[playIndex.value].uri, playIndex.value, data);
-        } else if (isShuffle.value) {
-          // Play a random song
-          final randomIndex = Random().nextInt(data.length);
-          playSong(data[randomIndex].uri, randomIndex, data);
+  updatePosition(List<SongModel> data) {
+  audioPlayer.durationStream.listen((d) {
+    duration.value = d.toString().split(".")[0];
+    max.value = d!.inSeconds.toDouble();
+  });
+  audioPlayer.positionStream.listen((p) {
+    position.value = p.toString().split(".")[0];
+    value.value = p.inSeconds.toDouble();
+
+    if (value.value >= max.value) {
+      audioPlayer.stop();
+      isPlaying(false);
+
+      // Play the next song based on repeat and shuffle modes
+      if (isRepeat.value) {
+        // Play the same song again
+        playSong(data[playIndex.value].uri, playIndex.value, data);
+      } else if (isShuffle.value) {
+        // Play a random song
+        final randomIndex = Random().nextInt(data.length);
+        playSong(data[randomIndex].uri, randomIndex, data);
+      } else {
+        // Play the next song if available, or the first song
+        if (playIndex.value < data.length - 1) {
+          playSong(data[playIndex.value + 1].uri, playIndex.value + 1, data);
         } else {
-          // Play the next song if available
-          if (playIndex.value < data.length - 1) {
-            playSong(data[playIndex.value + 1].uri, playIndex.value + 1, data);
-          }
+          playSong(data[0].uri, 0, data);
         }
       }
-    });
-  }
+    }
+  });
+}
+
 
   @override
   void onInit() {

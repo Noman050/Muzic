@@ -13,7 +13,7 @@ class MySplashScreen extends StatelessWidget {
         seconds: 3,
         navigateAfterSeconds: const HomeScreen(),
         image: Image.asset(
-          "assets/images/logo.png ",
+          "assets/images/logo.png",
           fit: BoxFit.cover,
         ),
         backgroundColor: bgColor,

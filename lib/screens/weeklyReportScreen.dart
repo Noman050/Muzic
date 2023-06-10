@@ -108,7 +108,7 @@ class WeeklyReportScreen extends StatelessWidget {
               viewPdfReport(filePath);
           }, icon: const Icon(Icons.picture_as_pdf_sharp, color: buttonColor,)) : const Text(""),
         ],
-        title: const Text('Weekly Report '),
+        title: const Text('Weekly Report'),
       ),
       body: controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty
           ? ListView.builder(
