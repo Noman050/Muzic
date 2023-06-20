@@ -19,6 +19,6 @@ class MySplashScreen extends StatelessWidget {
         backgroundColor: bgColor,
         styleTextUnderTheLoader: const TextStyle(),
         photoSize: 150.0,
-        loaderColor: whiteColor);
+        loaderColor: buttonColor);
   }
 }
