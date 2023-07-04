@@ -65,6 +65,7 @@ class _AudioMetadataScreenState extends State<AudioMetadataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white60Color,
       appBar: AppBar(
         title: const Text('Audio Metadata '),
       ),

@@ -49,6 +49,7 @@ class _HomeState extends State<HomeScreen> {
             orderType: OrderType.ASC_OR_SMALLER,
             sortType: null, 
             uriType: UriType.EXTERNAL,
+            
           ),
       builder: (context, snapshot){
         if(snapshot.data==null){
@@ -123,7 +124,7 @@ class _HomeState extends State<HomeScreen> {
           }
           else if(index==2){
             const MyDrawer();
-             Navigator.of(context).pushNamed(MyRoute.settingsScreem);            
+             Navigator.of(context).pushNamed(MyRoute.settingsScreen);            
           }
         },
     )

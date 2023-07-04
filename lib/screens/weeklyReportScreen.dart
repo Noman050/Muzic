@@ -29,57 +29,75 @@ class WeeklyReportScreen extends StatelessWidget {
   var datePlayedName;
   WeeklyReportScreen({super.key});
 
-  Future<String> generatePdfReport(List<WeeklyReportData> weeklyReports) async {
-    final pdf = pw.Document();
+ Future<String> generatePdfReport(List<WeeklyReportData> weeklyReports) async {
+  final pdf = pw.Document();
+  
+  final maxSongsPerPage = 10; // Maximum number of songs per page
+  
+  // Generate a PDF report for each week
+  for (int i = 0; i < weeklyReports.length; i++) {
+    final weeklyReport = weeklyReports[i];
+    final songCount = weeklyReport.playedSongs.length;
 
-    // Generate a PDF report for each weekF
-    for (int i = 0; i < weeklyReports.length; i++) {
-      final weeklyReport = weeklyReports[i];
+    // Add a title to the PDF report
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Text(
+              'Weekly Report Of Songs Played By You: \n${datePlayedName.toString()}',
+              style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold,),
+            ),
+          );
+        },
+      ),
+    );
 
-      // Add a title to the PDF report
+    // Add the played songs to the PDF report
+    for (int j = 0; j < songCount; j += maxSongsPerPage) {
+      final songsSubset = weeklyReport.playedSongs.sublist(j, j + maxSongsPerPage < songCount ? j + maxSongsPerPage : songCount);
+      final datesSubset = weeklyReport.playedDate.sublist(j, j + maxSongsPerPage < songCount ? j + maxSongsPerPage : songCount);
+
+      final tableData = <List<String>>[
+        ['Song Title', 'Date Played'],
+        for (int k = 0; k < songsSubset.length; k++)
+          [
+            songsSubset[k].title,
+            // songsSubset[k].artist.toString(),
+            datePlayedName = datesSubset[k].toString(), // Convert DateTime to string
+          ],
+      ];
+
       pdf.addPage(
         pw.Page(
           build: (pw.Context context) {
-            return pw.Center(
-              child: pw.Text(
-                'Weekly Report ${datePlayedName.toString()}',
-                style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold),
-              ),
+            return pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Table.fromTextArray(
+                  context: context,
+                  headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  cellAlignment: pw.Alignment.centerLeft,
+                  headerAlignment: pw.Alignment.centerLeft,
+                  cellStyle: const pw.TextStyle(),
+                  data: tableData,
+                ),
+              ],
             );
           },
         ),
       );
-
-      // Add the played songs to the PDF report
-      for (int j = 0; j < weeklyReport.playedSongs.length; j++) {
-        final song = weeklyReport.playedSongs[j];
-        final datePlayed = weeklyReport.playedDate[j];
-        datePlayedName = datePlayed;
-
-        pdf.addPage(
-          pw.Page(
-            build: (pw.Context context) {
-              return pw.Column(
-                children: [
-                  pw.Text('Song: ${song.title}'),
-                  pw.Text('Artist: ${song.artist}'),
-                  pw.Text('Date Played: $datePlayed'),
-                  pw.SizedBox(height: 10),
-                ],
-              );
-            },
-          ),
-        );
-      }
     }
-
-    // Save the PDF report to a file
-    final outputDir = await getExternalStorageDirectory();
-    final outputFile = File('${outputDir!.path}/${datePlayedName.toString()}.pdf');
-    await outputFile.writeAsBytes(await pdf.save());
-
-    return outputFile.path;
   }
+
+  // Save the PDF report to a file
+  final outputDir = await getExternalStorageDirectory();
+  final outputFile = File('${outputDir!.path}/${datePlayedName.toString()}.pdf');
+  await outputFile.writeAsBytes(await pdf.save());
+  return outputFile.path;
+
+}
+
 
   void viewPdfReport(String filePath) {
     if (filePath.isNotEmpty) {
@@ -111,44 +129,48 @@ class WeeklyReportScreen extends StatelessWidget {
         title: const Text('Weekly Report'),
       ),
       body: controller.playedSongs.isNotEmpty && controller.playedDate.isNotEmpty
-          ? ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: controller.playedSongs.length,
-              itemBuilder: (context, index) {
-                final song = controller.playedSongs[index];
-                final datePlayed = controller.playedDate[index];
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 4),
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    tileColor: bgColor,
-                    title: Text(
-                      song.title,
-                      style: const TextStyle(color: whiteColor),
-                    ),
-                    subtitle: Text(
-                      song.artist.toString(),
-                      style: const TextStyle(color: whiteColor),
-                    ),
-                    trailing: Text(
-                      datePlayed.toString(),
-                      style: const TextStyle(color: whiteColor),
-                    ),
-                    leading: QueryArtworkWidget(
-                      id: song.id,
-                      type: ArtworkType.AUDIO,
-                      nullArtworkWidget: const Icon(
-                        Icons.music_note,
-                        color: whiteColor,
-                        size: 32,
+          ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: controller.playedSongs.length,
+                itemBuilder: (context, index) {
+                  final song = controller.playedSongs[index];
+                  final datePlayed = controller.playedDate[index];
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 4),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      tileColor: bgColor,
+                      textColor: whiteColor,
+                      title: Text(
+                        song.title,
+                        style: const TextStyle(color: whiteColor),
+                      ),
+                      // subtitle: Text(
+                      //   song.artist.toString(),
+                      //   style: const TextStyle(color: whiteColor),
+                      // ),
+                      subtitle: Text(
+                        datePlayed.toString(),
+                        style: const TextStyle(color: whiteColor),
+                      ),
+                      leading: QueryArtworkWidget(
+                        id: song.id,
+                        type: ArtworkType.AUDIO,
+                        nullArtworkWidget: const Icon(
+                          Icons.music_note,
+                          color: whiteColor,
+                          size: 32,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ) : Column(
+                  );
+                },
+              ),
+          ) : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                  const Center(child:  Text("Empty File, No Song Is Played Yet Today!", style: TextStyle(color: whiteColor),),),

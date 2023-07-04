@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_app/screens/homeScreen.dart';
-import 'package:music_app/screens/meteDataRetriver.dart';
+import 'package:music_app/screens/meteDataRetriever.dart';
 import 'package:music_app/screens/settingsScreen.dart';
 
 import 'Models/myRoute.dart';
@@ -22,7 +22,7 @@ class MusicListeningApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Music Listening App',
+      title: 'Muzic',
       theme: myThemeData(),
 
     home: const Scaffold(
@@ -33,7 +33,7 @@ class MusicListeningApp extends StatelessWidget {
         MyRoute.optionScreen: (context) => const OptionScreen(),
         MyRoute.homeScreen: (context) =>  const HomeScreen(),
         MyRoute.meta : (context) =>  const AudioMetadataScreen(),
-        MyRoute.settingsScreem: (context) => const SettingsScreen(),
+        MyRoute.settingsScreen: (context) => const SettingsScreen(),
         MyRoute.reportScreen: (context) =>  WeeklyReportScreen(),
       },
     );

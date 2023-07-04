@@ -63,7 +63,7 @@ class _MyDrawerState extends State<MyDrawer> {
         leading: const Icon(Icons.settings, color: buttonColor,),
         title: const Text('Settings Screen', style: TextStyle(color: whiteColor, letterSpacing: 1),),
         onTap: () {
-          Navigator.of(context).pushNamed(MyRoute.settingsScreem);
+          Navigator.of(context).pushNamed(MyRoute.settingsScreen);
         },
       ),
       const Divider(color: white30Color),
