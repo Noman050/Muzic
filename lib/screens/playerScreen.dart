@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -15,7 +17,8 @@ class PlayerScreen extends StatefulWidget {
   _PlayerScreenState createState() => _PlayerScreenState();
 }
 
-class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderStateMixin {
+class _PlayerScreenState extends State<PlayerScreen>
+    with SingleTickerProviderStateMixin {
   final PlayerController controller = Get.find<PlayerController>();
   late final AnimationController rotationController;
 
@@ -52,14 +55,17 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                 ),
                 alignment: Alignment.center,
                 child: RotationTransition(
-                  turns: Tween(begin: 0.0, end: 1.0).animate(rotationController),
-                  child:  QueryArtworkWidget(
+                  turns:
+                      Tween(begin: 0.0, end: 1.0).animate(rotationController),
+                  child: QueryArtworkWidget(
                     id: 0,
                     type: ArtworkType.AUDIO,
                     artworkHeight: double.infinity,
                     artworkWidth: double.infinity,
                     nullArtworkWidget: Container(
-                      decoration: const BoxDecoration(color: buttonColor ,borderRadius: BorderRadius.all(Radius.circular(200))),
+                      decoration: const BoxDecoration(
+                          color: buttonColor,
+                          borderRadius: BorderRadius.all(Radius.circular(200))),
                       child: const Icon(
                         Icons.music_note_rounded,
                         size: 300,
@@ -71,7 +77,7 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
               ),
             ),
             const SizedBox(
-              height: 12, 
+              height: 12,
             ),
             Expanded(
               child: Container(
@@ -85,21 +91,25 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                   () => Column(
                     children: [
                       Text(
-                        widget.data[controller.playIndex.value].displayNameWOExt.toString(),
+                        widget.data[controller.playIndex.value].displayNameWOExt
+                            .toString(),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: myStyle(color: bgDarkColor, family: bold, size: 24),
+                        style:
+                            myStyle(color: bgDarkColor, family: bold, size: 24),
                       ),
                       const SizedBox(
                         height: 12,
                       ),
                       Text(
-                        widget.data[controller.playIndex.value].artist.toString(),
+                        widget.data[controller.playIndex.value].artist
+                            .toString(),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: myStyle(color: bgDarkColor, family: regular, size: 20),
+                        style: myStyle(
+                            color: bgDarkColor, family: regular, size: 20),
                       ),
                       const SizedBox(
                         height: 12,
@@ -115,19 +125,23 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                               thumbColor: blackColor,
                               activeColor: buttonColor,
                               inactiveColor: bgColor,
-                              min: const Duration(seconds: 0).inSeconds.toDouble(),
+                              min: const Duration(seconds: 0)
+                                  .inSeconds
+                                  .toDouble(),
                               max: controller.max.value,
                               value: controller.value.value,
                               onChanged: (newValue) {
                                 // Calculate the maximum allowed value
-                                final maxAllowedValue = controller.max.value - 1.0;
+                                final maxAllowedValue =
+                                    controller.max.value - 1.0;
                                 // Check if the new value exceeds the maximum allowed value
                                 if (newValue > maxAllowedValue) {
-                                // If exceeded, set the value to the maximum allowed value
-                                newValue = maxAllowedValue;
+                                  // If exceeded, set the value to the maximum allowed value
+                                  newValue = maxAllowedValue;
                                 }
                                 // Update the value in the controller
-                                controller.changeDurationToSeconds(newValue.toInt());
+                                controller
+                                    .changeDurationToSeconds(newValue.toInt());
                                 newValue = newValue;
                               },
                             ),
@@ -147,7 +161,9 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                           IconButton(
                             onPressed: controller.toggleRepeat,
                             icon: Icon(
-                              controller.isRepeat.value ? Icons.repeat_one_rounded : Icons.repeat_rounded,
+                              controller.isRepeat.value
+                                  ? Icons.repeat_one_rounded
+                                  : Icons.repeat_rounded,
                               size: 38,
                               color: blackColor,
                             ),
@@ -156,13 +172,15 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                             onPressed: () {
                               if (controller.playIndex.value > 0) {
                                 controller.playSong(
-                                  widget.data[controller.playIndex.value - 1].uri,
+                                  widget
+                                      .data[controller.playIndex.value - 1].uri,
                                   controller.playIndex.value - 1,
                                   widget.data,
                                 );
                               } else {
                                 controller.playIndex.value = 0;
-                                controller.playSong(widget.data[0].uri, 0, widget.data);
+                                controller.playSong(
+                                    widget.data[0].uri, 0, widget.data);
                               }
                             },
                             icon: const Icon(
@@ -188,23 +206,28 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                                     }
                                   },
                                   icon: controller.isPlaying.value
-                                      ? const Icon(Icons.pause, color: buttonColor)
-                                      : const Icon(Icons.play_arrow_rounded, color: buttonColor),
+                                      ? const Icon(Icons.pause,
+                                          color: buttonColor)
+                                      : const Icon(Icons.play_arrow_rounded,
+                                          color: buttonColor),
                                 ),
                               ),
                             ),
                           ),
                           IconButton(
                             onPressed: () {
-                              if (controller.playIndex.value < widget.data.length - 1) {
+                              if (controller.playIndex.value <
+                                  widget.data.length - 1) {
                                 controller.playSong(
-                                  widget.data[controller.playIndex.value + 1].uri,
+                                  widget
+                                      .data[controller.playIndex.value + 1].uri,
                                   controller.playIndex.value + 1,
                                   widget.data,
                                 );
                               } else {
                                 controller.playIndex.value = 0;
-                                controller.playSong(widget.data[0].uri, 0, widget.data);
+                                controller.playSong(
+                                    widget.data[0].uri, 0, widget.data);
                               }
                             },
                             icon: const Icon(
@@ -216,9 +239,15 @@ class _PlayerScreenState extends State<PlayerScreen> with SingleTickerProviderSt
                           IconButton(
                             onPressed: controller.toggleShuffle,
                             icon: Icon(
-                              controller.isShuffle.value ? Icons.shuffle_rounded : Icons.shuffle_outlined,
+                              controller.isShuffle.value
+                                  ? Icons.shuffle_rounded
+                                  : Icons.shuffle_outlined,
                               size: 38,
-                              color: controller.isRepeat.value ? blackColor : controller.isShuffle.value ? buttonColor : blackColor,
+                              color: controller.isRepeat.value
+                                  ? blackColor
+                                  : controller.isShuffle.value
+                                      ? buttonColor
+                                      : blackColor,
                             ),
                           ),
                         ],

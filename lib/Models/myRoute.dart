@@ -9,10 +9,10 @@ class MyRoute {
   static String artistScreen = "/artistScreen";
   static String albumScreen = "/albumScreen";
   static String genreScreen = "/genreScreen";
-  static String playSongScreen="/playSongScreen";
-  static String songDownloadScreen="/songDownloadScreen";
-  static String reportScreen="/reportScreen";
-  static String homeScreen="/homeScreen";
-  static String meta="/meta";
-  static String settingsScreen="/settingsScreen";
+  static String playSongScreen = "/playSongScreen";
+  static String songDownloadScreen = "/songDownloadScreen";
+  static String reportScreen = "/reportScreen";
+  static String homeScreen = "/homeScreen";
+  static String meta = "/meta";
+  static String settingsScreen = "/settingsScreen";
 }

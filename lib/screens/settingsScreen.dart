@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:music_app/consts/colors.dart';
 
@@ -141,7 +143,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: Text(
         title,
         style: const TextStyle(
-            fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1, color: whiteColor),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+            color: whiteColor),
       ),
     );
   }

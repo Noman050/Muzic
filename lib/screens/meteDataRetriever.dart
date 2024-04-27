@@ -8,7 +8,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:music_app/consts/colors.dart';
 
-
 class AudioMetadataScreen extends StatefulWidget {
   const AudioMetadataScreen({super.key});
 
@@ -24,6 +23,7 @@ class _AudioMetadataScreenState extends State<AudioMetadataScreen> {
   String? _genre;
 
   Future<void> _selectAudioFile() async {
+    //using device storage
     final result = await FilePicker.platform.pickFiles(
       type: FileType.audio,
     );
@@ -49,10 +49,10 @@ class _AudioMetadataScreenState extends State<AudioMetadataScreen> {
       final tagger = Audiotagger();
       await tagger.writeTags(
         tag: Tag(
-          album: "Noman",
-          artist: "Noman",
-          year: 2022.toString(),
-          genre: "Noman",
+          album: "Default Album",
+          artist: "Default Artist",
+          year: 2024.toString(),
+          genre: "Default Genre",
         ),
         path: _audioFile!.path,
       );
@@ -72,21 +72,19 @@ class _AudioMetadataScreenState extends State<AudioMetadataScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-
           children: [
             if (_audioFile != null)
               Column(
                 children: [
                   Text('Selected audio file: ${_audioFile!.path}'),
-                
-                    Column(
-                      children: [
-                        Text('Artist: $_artist'),
-                        Text('Year of release: $_year'),
-                        Text('Album of song: $_album'),
-                        Text('Genre: $_genre'),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Text('Artist: $_artist'),
+                      Text('Year of release: $_year'),
+                      Text('Album of song: $_album'),
+                      Text('Genre: $_genre'),
+                    ],
+                  ),
                 ],
               ),
             ElevatedButton(

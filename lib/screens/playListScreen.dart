@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api, file_names
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,10 @@ class PlaylistModel {
 
 class PlaylistScreen extends StatefulWidget {
   final List<SongModel> data;
-  const PlaylistScreen({super.key, required this.data,});
+  const PlaylistScreen({
+    super.key,
+    required this.data,
+  });
 
   @override
   _PlaylistScreenState createState() => _PlaylistScreenState();
@@ -112,7 +115,8 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PlaylistDetailScreen(playlist: playlist, data: widget.data),
+        builder: (context) =>
+            PlaylistDetailScreen(playlist: playlist, data: widget.data),
       ),
     );
   }
@@ -141,27 +145,43 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
             return Container(
               margin: const EdgeInsets.only(bottom: 4),
               child: ListTile(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 tileColor: bgColor,
-                title: Text(playlist.name, style: const TextStyle(color: whiteColor),),
+                title: Text(
+                  playlist.name,
+                  style: const TextStyle(color: whiteColor),
+                ),
                 trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: redColor,),
+                  icon: const Icon(
+                    Icons.delete,
+                    color: redColor,
+                  ),
                   onPressed: () {
-                    showDialog(context: context, builder: (BuildContext context){ 
-                      return AlertDialog(
-                      title: const Text("Do you want to delete this playlist?"),
-                      content: const Text("Playlist with all data will be deleted."),
-                      actions: [
-                      TextButton(onPressed: (){
-                        deletePlaylist(playlist);
-                        Navigator.of(context).pop();
-                      }, child: const Text("Ok")),
-                      TextButton(onPressed: (){
-                        Navigator.of(context).pop();
-                      }, child: const Text("Cancel")),
-                      ],
-                    );
-                    },
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text(
+                              "Do you want to delete this playlist?"),
+                          content: const Text(
+                              "Playlist with all data will be deleted."),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  deletePlaylist(playlist);
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Ok")),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Cancel")),
+                          ],
+                        );
+                      },
                     );
                   },
                 ),
@@ -174,7 +194,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         ),
       ),
     );
-    
   }
 }
 
@@ -182,7 +201,8 @@ class PlaylistDetailScreen extends StatefulWidget {
   final PlaylistModel playlist;
   final List<SongModel> data;
 
-  const PlaylistDetailScreen({super.key, required this.playlist, required this.data});
+  const PlaylistDetailScreen(
+      {super.key, required this.playlist, required this.data});
 
   @override
   _PlaylistDetailScreenState createState() => _PlaylistDetailScreenState();
@@ -195,6 +215,7 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
       widget.playlist.songs.remove(song);
     });
   }
+
   // add the selected songs to the playlist
   void addSongToPlaylist() async {
     final List<SongModel> songs = widget.data;
@@ -202,12 +223,17 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape:  RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0)
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
           backgroundColor: bgColor,
-          title: const Text("Select Songs", style: TextStyle(color: whiteColor),),
-          icon: const Icon(Icons.list, color: buttonColor,),
+          title: const Text(
+            "Select Songs",
+            style: TextStyle(color: whiteColor),
+          ),
+          icon: const Icon(
+            Icons.list,
+            color: buttonColor,
+          ),
           content: SingleChildScrollView(
             child: Column(
               children: [
@@ -219,28 +245,37 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
                     itemBuilder: (context, index) {
                       final song = songs[index];
                       return ListTile(
-                        title: Text(song.title.toString(), style: const TextStyle(color: whiteColor),),
+                        title: Text(
+                          song.title.toString(),
+                          style: const TextStyle(color: whiteColor),
+                        ),
                         trailing: IconButton(
-                          icon: const Icon(Icons.add, color: buttonColor,),
+                          icon: const Icon(
+                            Icons.add,
+                            color: buttonColor,
+                          ),
                           onPressed: () {
                             setState(() {
-                                if(!widget.playlist.songs.contains(song)){
+                              if (!widget.playlist.songs.contains(song)) {
                                 widget.playlist.songs.add(song);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("${song.title.toLowerCase()} Added To ${widget.playlist.name.toString()}"), duration: const Duration(seconds: 1)),
+                                  SnackBar(
+                                      content: Text(
+                                          "${song.title.toLowerCase()} Added To ${widget.playlist.name.toString()}"),
+                                      duration: const Duration(seconds: 1)),
                                 );
-                                }
-                                else{
-                                  setState(() {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("${song.title.toLowerCase()} is Already Exists in ${widget.playlist.name.toString()}"), duration: const Duration(seconds: 1)),
-                                );
-                                  });
-                                  
-                                }
+                              } else {
+                                setState(() {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "${song.title.toLowerCase()} is Already Exists in ${widget.playlist.name.toString()}"),
+                                        duration: const Duration(seconds: 1)),
+                                  );
+                                });
+                              }
                             });
                           },
-                          
                         ),
                       );
                     },
@@ -250,7 +285,10 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
                 sizedBox10(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
-                  child: const Text("OK", style: TextStyle(color: blackColor),),
+                  child: const Text(
+                    "OK",
+                    style: TextStyle(color: blackColor),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -262,6 +300,7 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -279,42 +318,60 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
             return Container(
               margin: const EdgeInsets.only(bottom: 4),
               child: ListTile(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 tileColor: bgColor,
                 textColor: whiteColor,
                 title: Text(song.title.toString()),
                 leading: IconButton(
-                      icon: const Icon(Icons.play_circle_filled, color: buttonColor,),
-                      onPressed: () {
-                        final playerController = Get.find<PlayerController>();
-                       playerController.playSong(song.uri, index, widget.playlist.songs);
-                        
-                       Navigator.push(
+                  icon: const Icon(
+                    Icons.play_circle_filled,
+                    color: buttonColor,
+                  ),
+                  onPressed: () {
+                    final playerController = Get.find<PlayerController>();
+                    playerController.playSong(
+                        song.uri, index, widget.playlist.songs);
+
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PlayerScreen(data: widget.playlist.songs),
+                        builder: (context) =>
+                            PlayerScreen(data: widget.playlist.songs),
                       ),
                     );
-                      },
-                    ),
+                  },
+                ),
                 trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: redColor,),
+                  icon: const Icon(
+                    Icons.delete,
+                    color: redColor,
+                  ),
                   onPressed: () {
-                     showDialog(context: context, builder: (BuildContext context){ 
-                      return AlertDialog(
-                      title: const Text("Do you want to delete this Music?"),
-                      content: Text("This muzic will be deleted from ${widget.playlist.name}"),
-                      actions: [
-                      TextButton(onPressed: (){
-                        removeSongFromPlaylist(song);
-                        Navigator.of(context).pop();
-                      }, child: const Text("Ok")),
-                      TextButton(onPressed: (){
-                        Navigator.of(context).pop();
-                      }, child: const Text("Cancel")),
-                      ],
-                    );
-                    },
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title:
+                              const Text("Do you want to delete this Music?"),
+                          content: Text(
+                              "This muzic will be deleted from ${widget.playlist.name}"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  removeSongFromPlaylist(song);
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Ok")),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Cancel")),
+                          ],
+                        );
+                      },
                     );
                   },
                 ),
@@ -325,7 +382,10 @@ class _PlaylistDetailScreenState extends State<PlaylistDetailScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: buttonColor,
-        child: const Icon(Icons.add, color: blackColor,),
+        child: const Icon(
+          Icons.add,
+          color: blackColor,
+        ),
         onPressed: () {
           addSongToPlaylist();
         },
