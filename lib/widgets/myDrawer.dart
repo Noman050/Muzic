@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:file_picker/file_picker.dart';
 import "package:flutter/material.dart";
+import 'package:permission_handler/permission_handler.dart';
 import '../Models/myRoute.dart';
 import '../consts/colors.dart';
+import '../screens/camScreen.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -18,6 +21,29 @@ class _MyDrawerState extends State<MyDrawer> {
       await FilePicker.platform.pickFiles(
         type: FileType.audio,
       );
+    }
+
+    Future<bool> _checkPer(Permission permission) async {
+      AndroidDeviceInfo build = await DeviceInfoPlugin().androidInfo;
+      if (build.version.sdkInt >= 30) {
+        var re = await Permission.manageExternalStorage.request();
+        if (re.isGranted) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (await permission.isGranted) {
+          return true;
+        } else {
+          var result = await permission.request();
+          if (result.isGranted) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
     }
 
     return Drawer(
@@ -107,20 +133,6 @@ class _MyDrawerState extends State<MyDrawer> {
             Navigator.of(context).pushNamed(MyRoute.optionScreen);
           },
         ),
-        const Divider(color: white30Color),
-        ListTile(
-          leading: const Icon(
-            Icons.info,
-            color: buttonColor,
-          ),
-          title: const Text('App Version', style: TextStyle(color: whiteColor)),
-          subtitle: const Text(
-            '1.0.0',
-            style: TextStyle(color: whiteColor),
-          ),
-          onTap: () {},
-        ),
-        const Divider(color: white30Color),
       ]),
     );
   }

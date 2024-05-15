@@ -46,6 +46,7 @@ dependencies:
   device_info_plus: ^9.0.2
   media_metadata_retriever: ^0.0.3
   audiotagger: ^2.2.1
+  camera:
   shared_preferences: ^2.1.1
   pdf: ^3.0.0
 

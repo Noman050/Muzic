@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../Models/myRoute.dart';
 import '../consts/colors.dart';
+import 'camScreen.dart';
 
 class OptionScreen extends StatefulWidget {
   const OptionScreen({super.key});
@@ -57,7 +58,7 @@ class _OptionScreenState extends State<OptionScreen> {
                 "assets/images/logo.png",
                 fit: BoxFit.cover,
               ),
-              const SizedBox(height: 120),
+              const SizedBox(height: 50),
               Card(
                 elevation: 50,
                 color: bgColor,
@@ -68,7 +69,7 @@ class _OptionScreenState extends State<OptionScreen> {
                       minimumSize: const Size(180, 50),
                       backgroundColor: buttonColor),
                   icon: const Icon(
-                    Icons.add_to_drive,
+                    Icons.add,
                     color: blackColor,
                     size: 30,
                   ),
@@ -121,7 +122,7 @@ class _OptionScreenState extends State<OptionScreen> {
                 color: bgColor,
                 child: ElevatedButton.icon(
                   icon: const Icon(
-                    Icons.check_box,
+                    Icons.camera,
                     color: blackColor,
                     size: 30,
                   ),
@@ -131,11 +132,20 @@ class _OptionScreenState extends State<OptionScreen> {
                     minimumSize: const Size(180, 50),
                     backgroundColor: buttonColor,
                   ),
-                  onPressed: () {
-                    openAppSettings();
+                  onPressed: () async {
+                    if (await requestPermission(Permission.camera) == true) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CamScreen(),
+                        ),
+                      );
+                    } else {
+                      await requestPermission(Permission.camera);
+                    }
                   },
                   label: const Text(
-                    "Permissions",
+                    "Camera",
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -150,7 +160,7 @@ class _OptionScreenState extends State<OptionScreen> {
                 color: bgColor,
                 child: ElevatedButton.icon(
                   icon: const Icon(
-                    Icons.exit_to_app,
+                    Icons.access_time,
                     color: blackColor,
                     size: 30,
                   ),
@@ -161,10 +171,10 @@ class _OptionScreenState extends State<OptionScreen> {
                     backgroundColor: buttonColor,
                   ),
                   onPressed: () {
-                    SystemNavigator.pop();
+                    openAppSettings();
                   },
                   label: const Text(
-                    "Exit",
+                    "Allow Me",
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -173,6 +183,16 @@ class _OptionScreenState extends State<OptionScreen> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 50,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Please Allow All Permissons by Pressing on Allow me button To play and enjoy Songs !\nIf You Already Did this Please Ignore this message",
+                  style: TextStyle(color: white30Color, letterSpacing: 2),
+                ),
+              )
             ],
           ),
         ),
