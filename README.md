@@ -71,10 +71,7 @@ Muzic is a Flutter-based music application for Android that allows users to mana
 
 | Splash                                      | Home                                     | Drawer                                      |
 | ------------------------------------------- | ------------------------------------------- | -------------------------------------------- |
-|![Screenshot_2023-06-05-18-16-24-523_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/1bc57471-645f-426e-bd43-c45f6f410bd6)
- | ![Screenshot_2023-06-05-18-18-23-279_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/f7c85d6b-65a4-489d-98a8-47308264cce8)
- | ![Screenshot_2023-06-05-18-16-37-621_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/5aea3168-5274-4660-8933-2f03787a6bb9)
-|
+|![Screenshot_2023-06-05-18-16-24-523_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/1bc57471-645f-426e-bd43-c45f6f410bd6) | ![Screenshot_2023-06-05-18-18-23-279_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/f7c85d6b-65a4-489d-98a8-47308264cce8) | ![Screenshot_2023-06-05-18-16-37-621_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/5aea3168-5274-4660-8933-2f03787a6bb9) |
 | Playlist                                      | Settings                                     | Search                                      |
 | ![Screenshot_2023-06-05-18-16-53-275_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/9298a67e-27e0-4c44-8024-2dba94b41137) | ![Screenshot_2023-06-05-18-16-58-668_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/aaf8b36a-9fbf-4f32-bf36-cd580cb4af2c) | ![Screenshot_2023-06-05-18-17-15-956_com example music_app](https://github.com/Noman050/Muzic/assets/107186063/142770bf-bb4d-489c-8352-d5923e7628c6) |
 | Reports                                     | Add Song                                    | Player                                     |
